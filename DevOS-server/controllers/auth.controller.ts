@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import {registerSchema ,loginSchema} from "../validations/auth.validation";
 import {hashPassword} from "../services/auth.service";
 import {User} from "../models/User";
+import { generateToken } from "../services/jwt.service";
 import bcrypt from "bcryptjs";
 
 export const registerUser = async(req: Request, res:Response) => {
@@ -53,6 +54,7 @@ export const loginUser = async(req: Request, res: Response) => {
                 message: "User not found"
             });
         };
+
         const isPasswordValid = await bcrypt.compare(validatedData.password, user.password);
 
         if(!isPasswordValid){
@@ -61,9 +63,16 @@ export const loginUser = async(req: Request, res: Response) => {
                 message: "Invalid credentials"
             });
         };
+        const token = generateToken(user._id.toString());
+
         return res.status(200).json({
-            success: true,
-            message: "Login successful"
+            success:true,
+            token,
+            user:{
+                id: user._id,
+                name: user.name,
+                email: user.email,
+            },
         });
     }
     catch(error:any){
