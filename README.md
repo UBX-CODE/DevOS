@@ -1,5 +1,4 @@
 <div align="center">
-  <img src="https://media.giphy.com/media/qgQUggCGvnPyg/giphy.gif" alt="DevOS Tech Banner" width="100%" height="250" style="object-fit: cover; border-radius: 10px;" />
 
   <h1 style="font-family: 'Courier New', Courier, monospace; font-weight: bold; margin-top: 20px;">
     DevOS
