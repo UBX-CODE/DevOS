@@ -164,6 +164,3 @@ DevOS is built like a production application.
 - **Maintainability**
 
 <br>
-<div align="center">
-  <i>Built with passion by developers, for developers.</i>
-</div>
