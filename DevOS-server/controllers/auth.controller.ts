@@ -1,7 +1,8 @@
 import { Request, Response } from "express";
-import {registerSchema} from "../validations/auth.validation";
+import {registerSchema ,loginSchema} from "../validations/auth.validation";
 import {hashPassword} from "../services/auth.service";
 import {User} from "../models/User";
+import bcrypt from "bcryptjs";
 
 export const registerUser = async(req: Request, res:Response) => {
     try{
@@ -36,6 +37,39 @@ export const registerUser = async(req: Request, res:Response) => {
             success:false,
             message: "VALIDATION FAILED",
             error,
+        });
+    }
+};
+
+export const loginUser = async(req: Request, res: Response) => {
+    try{
+        const validatedData = loginSchema.parse(req.body);
+
+        const user = await User.findOne({email: validatedData.email});
+
+        if(!user){
+            return res.status(404).json({
+                success: false,
+                message: "User not found"
+            });
+        };
+        const isPasswordValid = await bcrypt.compare(validatedData.password, user.password);
+
+        if(!isPasswordValid){
+            return res.status(401).json({
+                success: false,
+                message: "Invalid credentials"
+            });
+        };
+        return res.status(200).json({
+            success: true,
+            message: "Login successful"
+        });
+    }
+    catch(error:any){
+        return res.status(400).json({
+            success: false,
+            message: error.message,
         });
     }
 };
