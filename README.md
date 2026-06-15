@@ -1,386 +1,144 @@
-# DevOS — Complete Project Vision & Specification
+<div align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&height=200&section=header&text=DevOS&fontSize=80&animation=fadeIn&fontAlignY=35&desc=The%20Ultimate%20Developer%20Operating%20System&descAlignY=55&descAlign=50" alt="DevOS Banner" />
 
-Build a production-style full-stack web application called **DevOS**.
+  <p align="center">
+    <strong>A centralized productivity platform combining project management, GitHub & LeetCode analytics, and AI insights into one single, unified dashboard.</strong>
+  </p>
 
-DevOS is a centralized developer productivity platform that combines project management, task management, coding progress tracking, GitHub analytics, LeetCode analytics, AI insights, and personal developer metrics into a single dashboard.
-
-The goal is to eliminate context switching between multiple tools and provide developers with a unified operating system for managing their growth and work.
-
----
-
-## Core Vision
-
-Developers currently use:
-* GitHub
-* LeetCode
-* Notion
-* Trello
-* Google Tasks
-* Notes
-* Resume Trackers
-* Productivity Tools
-
-DevOS should combine all these experiences into one application.
-
-The application should feel modern, professional, scalable, and production-ready.
+  <p align="center">
+    <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React" />
+    <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
+    <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" />
+    <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="Node.js" />
+    <img src="https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white" alt="Express.js" />
+    <img src="https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB" />
+  </p>
+</div>
 
 ---
 
-## User Authentication
+## 🎯 Core Vision
 
-**Features:**
-* User Registration
-* User Login
-* JWT Authentication
-* Password Hashing using bcrypt
-* Protected Routes
-* User Profile Management
-* Logout Functionality
-* Refresh Token Support (Future)
+Developers currently juggle multiple tools like **GitHub, LeetCode, Notion, Trello, Google Tasks, Notes, and Resume Trackers**. 
 
-**User Fields:**
-* Name
-* Email
-* Password
-* GitHub Username
-* LeetCode Username
-* Profile Image (Future)
+**DevOS** eliminates context switching by combining all these experiences into one modern, scalable, and production-ready application. A single pane of glass for managing your growth, work, and developer identity.
 
 ---
 
-## Dashboard
+## 🚀 Key Modules & Features
 
-Dashboard should display:
+### 🔐 User Authentication
+A robust and secure identity system.
+- 👤 **Registration & Login**
+- 🛡️ **JWT Authentication & Protected Routes**
+- 🔒 **Password Hashing** (`bcrypt`)
+- 🔄 **Refresh Token Support** *(Future)*
+- 🖼️ **Profile Management**
 
-### Welcome Section
-Show:
-* User Name
-* Current Date
-* Personalized Greeting
+### 📊 The Dashboard
+Your daily command center.
+- 👋 **Personalized Welcome & Greeting**
+- 📈 **Statistics Cards:** Total/Pending/Completed Tasks, Projects, GitHub Contributions, Repositories, LeetCode Solved, Contest Rating, Current Streak.
+- ⚡ **Quick Actions:** Create Project/Task, Sync integrations.
+- 🔄 **Live Activity Feed:** Recent tasks, projects, and synced coding activities.
 
-### Statistics Cards
-Display:
-* Total Projects
-* Total Tasks
-* Completed Tasks
-* Pending Tasks
-* GitHub Contributions
-* GitHub Repositories
-* LeetCode Problems Solved
-* LeetCode Contest Rating
-* Current Streak
+### 💼 Project Management
+- 📂 **Lifecycle Management:** Create, Update, Delete, Archive.
+- 🛠️ **Project Tracking:** Tech Stack, GitHub/Demo Links, Start/End Dates, Priority.
+- 📊 **Analytics:** Completion Percentage, Task distribution.
+- 🚥 **Statuses:** `Planned` | `In Progress` | `Completed` | `Archived`
 
-### Quick Actions
-Buttons:
-* Create Project
-* Create Task
-* Sync GitHub
-* Sync LeetCode
+### ✅ Task Management & Kanban Board
+- 📋 **Task Tracking:** Priority, Due Date, Tags, Descriptions.
+- 🔄 **Kanban Board:** Interactive drag-and-drop support.
+- 🚥 **Statuses:** `Todo` | `In Progress` | `Review` | `Done`
+- ⚡ **Priority Levels:** `Low` | `Medium` | `High` | `Critical`
 
-### Activity Feed
-Display:
-* Recent Tasks
-* Recent Project Updates
-* GitHub Activity
-* LeetCode Activity
+### 🐙 GitHub Integration
+Seamlessly connect your GitHub account.
+- 📈 **Metrics:** Followers, Public Repositories, Stars, Forks, Contributions.
+- 🗺️ **Visuals:** Contribution Heatmap, Commit Activity, Language Usage.
+- 🧠 **Analytics:** Most Used Language, Most Active Repository, Weekly Trends.
 
----
+### 💻 LeetCode Integration
+Track your problem-solving journey.
+- 🔢 **Metrics:** Problems Solved (Easy/Medium/Hard), Contest Rating, Ranking, Current Streak.
+- 📅 **Visuals:** Submission Calendar, Problem Solving Graph, Topic Wise Progress.
 
-## Project Management Module
+### 🤖 AI Productivity Assistant
+Smart insights to guide your growth.
+- 💡 **Suggestions:** "Focus more on Dynamic Programming this week."
+- 📊 **Weekly Summaries & Prioritization**
+- 📉 **Alerts:** "Your GitHub activity dropped by 20%."
 
-Users should be able to:
-* Create Project
-* Update Project
-* Delete Project
-* Archive Project
-
-**Project Fields:**
-* Title
-* Description
-* Status
-* Tech Stack
-* GitHub Link
-* Live Demo Link
-* Start Date
-* End Date
-* Priority
-
-**Project Status:**
-* Planned
-* In Progress
-* Completed
-* Archived
-
-**Project Analytics:**
-* Completion Percentage
-* Total Tasks
-* Completed Tasks
+### 🔮 Future Horizons
+- 📝 **Resume Builder:** Auto-generate PDF/DOCX resumes from your metrics and projects.
+- 📓 **Notes Module:** Create, organize, and search developer notes.
 
 ---
 
-## Task Management Module
+## 🏗️ Technical Architecture
 
-**Features:**
-* Create Task
-* Update Task
-* Delete Task
-* Mark Complete
-* Assign Priority
-* Filter Tasks
+### 💻 Frontend
+Built for a responsive, modern, and snappy user experience.
+- **Framework:** React + TypeScript
+- **Styling:** Tailwind CSS
+- **Routing & Fetching:** React Router, Axios, TanStack Query
 
-**Task Fields:**
-* Title
-* Description
-* Status
-* Priority
-* Due Date
-* Tags
-
-**Status:**
-* Todo
-* In Progress
-* Review
-* Completed
-
-**Priority:**
-* Low
-* Medium
-* High
-* Critical
-
----
-
-## Kanban Board
-
-**Columns:**
-* Todo
-* In Progress
-* Review
-* Done
-
-**Support:**
-* Drag and Drop
-* Status Updates
-* Real-Time UI Updates
-
----
-
-## GitHub Integration
-
-Users can connect GitHub accounts.
-
-**Fetch:**
-* Username
-* Avatar
-* Followers
-* Following
-* Public Repositories
-* Stars
-* Forks
-* Contributions
-
-**Display:**
-* Contribution Heatmap
-* Repository Analytics
-* Commit Activity
-* Language Usage
-
-**Analytics:**
-* Most Used Language
-* Most Active Repository
-* Weekly Commit Trend
-
----
-
-## LeetCode Integration
-
-Users can connect LeetCode accounts.
-
-**Fetch:**
-* Problems Solved
-* Easy Solved
-* Medium Solved
-* Hard Solved
-* Contest Rating
-* Ranking
-* Current Streak
-* Submission Calendar
-
-**Display:**
-* Problem Solving Graph
-* Topic Wise Progress
-* Contest Performance
-
----
-
-## AI Productivity Assistant
-
-**Features:**
-* Productivity Suggestions
-* Weekly Progress Summary
-* Learning Recommendations
-* Task Prioritization Suggestions
-
-**Examples:**
-* "Focus more on Dynamic Programming this week."
-* "You solved fewer problems compared to last week."
-* "Your GitHub activity dropped by 20%."
-
----
-
-## Analytics Dashboard
-
-Provide:
-
-**Productivity Metrics**
-* Tasks Completed
-* Weekly Productivity
-* Monthly Productivity
-
-**Coding Metrics**
-* GitHub Activity
-* LeetCode Activity
-
-**Growth Metrics**
-* Learning Progress
-* Skill Development
-
-**Visualizations:**
-* Bar Charts
-* Pie Charts
-* Line Charts
-
----
-
-## Resume Builder Module (Future)
-
-Generate resume directly from:
-* Projects
-* Skills
-* GitHub Stats
-* Achievements
-
-**Export:**
-* PDF
-* DOCX
-
----
-
-## Notes Module (Future)
-
-Users can:
-* Create Notes
-* Organize Notes
-* Search Notes
-
----
-
-## Tech Stack
-
-**Frontend:**
-* React
-* TypeScript
-* Tailwind CSS
-* React Router
-* Axios
-* TanStack Query
-
-**Backend:**
-* Node.js
-* Express.js
-* TypeScript
-* MongoDB Atlas
-* Mongoose
-
-**Authentication:**
-* JWT
-* bcryptjs
-
-**Validation:**
-* Zod
-
-**Deployment:**
-* Vercel (Frontend)
-* Render / Railway (Backend)
-* MongoDB Atlas
-
----
-
-## Backend Architecture
-
+**Directory Structure:**
+```text
+src/ 
+ ┣ pages/ 
+ ┣ components/ 
+ ┣ layouts/ 
+ ┣ hooks/ 
+ ┣ services/ 
+ ┣ routes/ 
+ ┣ context/ 
+ ┣ utils/ 
+ ┗ types/
 ```
+
+### ⚙️ Backend
+Scalable and clean REST API.
+- **Runtime & Framework:** Node.js, Express.js
+- **Language:** TypeScript
+- **Database:** MongoDB Atlas + Mongoose
+- **Security:** JWT, bcryptjs, Zod (Validation)
+
+**Directory Structure:**
+```text
 src/
-* config
-* controllers
-* middleware
-* models
-* routes
-* services
-* validations
-* types
-* utils
+ ┣ config/
+ ┣ controllers/
+ ┣ middleware/
+ ┣ models/
+ ┣ routes/
+ ┣ services/
+ ┣ validations/
+ ┣ types/
+ ┗ utils/
 ```
-
-**Pattern:**
-Routes → Controllers → Services → Models → MongoDB
 
 ---
 
-## Frontend Architecture
+## 🎨 UI/UX Design Philosophy
 
-```
-src/
-* pages
-* components
-* layouts
-* hooks
-* services
-* routes
-* context
-* utils
-* types
-```
-
-**Pattern:**
-Pages → Components → Services → API
+Our design aesthetic is deeply inspired by modern platforms like **Linear, Notion, Vercel, and Clerk**.
+- 🌌 **Theme:** Modern, Minimalist, Premium, Dashboard-Focused.
+- 🌗 **Features:** Native Dark Mode, Smooth Micro-Animations, Professional Cards, and Clean Typography.
 
 ---
 
-## UI Design Requirements
+## 🛠️ Development Philosophy
 
-**Theme:**
-* Modern
-* Minimal
-* Premium
-* Dashboard Focused
-
-**Features:**
-* Responsive Design
-* Dark Mode
-* Smooth Animations
-* Professional Cards
-* Clean Typography
-
-**Inspiration:**
-* Linear
-* Notion
-* GitHub
-* Vercel
-* Clerk Dashboard
+DevOS is not just a project; it's built like a production application.
+- **Clean Architecture** & **Reusable Components**
+- **Scalability** & **Performance**
+- **Type Safety** & **Security**
+- **Maintainability**
 
 ---
-
-## Development Philosophy
-
-The project should be built like a production application rather than a tutorial project.
-
-Focus on:
-* Clean Architecture
-* Reusable Components
-* Scalability
-* Type Safety
-* Security
-* Performance
-* Maintainability
-
-Every feature should be implemented with real-world engineering practices and explained deeply for learning purposes.
+<div align="center">
+  <i>Built with passion by developers, for developers.</i>
+</div>
