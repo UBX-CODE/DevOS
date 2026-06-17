@@ -20,10 +20,11 @@ export const authMiddleware = (req: Request,res: Response,next:NextFunction) => 
             })
         }
 
-        const decoded = jwt.verify(token, process.env.JWT_SECRET!);
+        const decoded = jwt.verify(token, process.env.JWT_SECRET!) as {
+            userId: string;
+        };
 
-        console.log(decoded);
-
+        req.user = {userId: decoded.userId} ;
         next(); 
     }catch(error){
         return res.status(401).json({
