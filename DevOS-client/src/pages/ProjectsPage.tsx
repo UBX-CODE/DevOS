@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getProjects } from "../services/project.service";
+import { getProjects,createProject} from "../services/project.service";
 
 interface Project {
   _id: string;
@@ -11,10 +11,34 @@ interface Project {
 function ProjectsPage() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
+  const [title, setTitle] = useState("");
+const [description, setDescription] = useState("");
 
   useEffect(() => {
     fetchProjects();
   }, []);
+
+  const handleCreateProject =
+  async () => {
+
+    try {
+
+      await createProject({
+        title,
+        description,
+      });
+
+      setTitle("");
+      setDescription("");
+
+      fetchProjects();
+
+    } catch (error) {
+
+      console.error(error);
+
+    }
+};
 
   const fetchProjects = async () => {
     try {
@@ -39,7 +63,46 @@ function ProjectsPage() {
       <h1 className="text-3xl font-bold mb-6">
         My Projects
       </h1>
+        <div className="mb-6">
 
+  <input
+    type="text"
+    placeholder="Project Title"
+    value={title}
+    onChange={(e) =>
+      setTitle(e.target.value)
+    }
+    className="border p-2 mr-2"
+  />
+
+  <input
+    type="text"
+    placeholder="Project Description"
+    value={description}
+    onChange={(e) =>
+      setDescription(
+        e.target.value
+      )
+    }
+    className="border p-2 mr-2"
+  />
+
+  <button
+    onClick={
+      handleCreateProject
+    }
+    className="
+      bg-black
+      text-white
+      px-4
+      py-2
+      rounded
+    "
+  >
+    Create
+  </button>
+
+</div>
       {projects.length === 0 ? (
         <p>No Projects Found</p>
       ) : (
