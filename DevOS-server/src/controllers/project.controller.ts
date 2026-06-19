@@ -67,7 +67,7 @@ export const getProjectById = async(req:Request, res:Response) => {
     }
 }
 
-export const updateProject = async (res:Response, req:Request) => {
+export const updateProject = async (req:Request,res:Response ) => {
     try{
         const {id} = req.params;
         const updatedProject = await Project.findOneAndUpdate({
