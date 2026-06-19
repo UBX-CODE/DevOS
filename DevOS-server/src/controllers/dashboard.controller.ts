@@ -3,7 +3,7 @@ import{Request, Response} from "express";
 import {Project} from "../models/Project";
 import {Task} from "../models/Task";
 
-export const getDashboardStats = async (res: Response, req:Request) => {
+export const getDashboardStats = async (req:Request, res: Response) => {
     try{
         const userId = req.user?.userId;
 
