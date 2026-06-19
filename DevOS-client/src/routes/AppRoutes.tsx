@@ -4,6 +4,7 @@ import DashboardLayout from "../layouts/DashboardLayout";
 
 import DashboardPage from "../pages/DashboardPage";
 import ProjectsPage from "../pages/ProjectsPage";
+import TasksPage from "../pages/TaskPage";
 import SettingsPage from "../pages/SettingsPage";
 
 import LoginPage from "../pages/LoginPage";
@@ -18,6 +19,7 @@ const AppRoutes = () => {
             <Route element = {<DashboardLayout />}>
                 <Route path = "/" element = {<DashboardPage />} />
                 <Route path = "/projects" element = {<ProjectsPage />} />
+                <Route path = "/tasks" element = {<TasksPage />} />
                 <Route path = "/settings" element = {<SettingsPage />} />
             </Route>
         </Routes>

@@ -34,7 +34,7 @@ export const createTask = async (req: Request,res: Response) => {
   }
 };
 
-export const getProjectTask = async(res:Response , req:Request) => {
+export const getProjectTask = async( req:Request,res:Response) => {
   try{
     const {projectId} = req.params;
     const project = await Project.findOne({
@@ -63,7 +63,7 @@ export const getProjectTask = async(res:Response , req:Request) => {
   }
 };
 
-export const getMyTasks = async (res:Response, req:Request) => {
+export const getMyTasks = async (req: Request,res:Response) => {
   try{
     const tasks = await Task.find({
       userId: req.user?.userId,
