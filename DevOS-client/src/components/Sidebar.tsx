@@ -1,5 +1,5 @@
 import {NavLink} from "react-router-dom";
-import {FiHome, FiFolder, FiBarChart2, FiSettings} from "react-icons/fi";
+import {FiHome, FiFolder, FiCheckSquare, FiSettings} from "react-icons/fi";
 
 const Sidebar = () => {
     return (
@@ -8,7 +8,11 @@ const Sidebar = () => {
 
             <nav className = "flex flex-col gap-4">
                 <NavLink to="/" className={({isActive}) => `flex items-center gap-3 rounded-lg p-3 ${isActive ? "bg-black text-white" : "hover:bg-gray-100"}`}><FiHome/>Dashboard</NavLink>
+                
                 <NavLink to="/projects" className={({isActive}) => `flex items-center gap-3 rounded-lg p-3 ${isActive ? "bg-black text-white" : "hover:bg-gray-100"}`}><FiFolder/>Projects</NavLink>
+                
+                <NavLink to="/tasks"className={({ isActive }) => `flex items-center gap-3 rounded-lg p-3 ${isActive ? "bg-black text-white" : "hover:bg-gray-100"}`}><FiCheckSquare/>Tasks</NavLink>
+
                 <NavLink to="/settings" className={({isActive}) => `flex items-center gap-3 rounded-lg p-3 ${isActive ? "bg-black text-white" : "hover:bg-gray-100"}`}><FiSettings/>Settings</NavLink>
             </nav>
         </aside>

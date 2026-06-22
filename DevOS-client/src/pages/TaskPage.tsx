@@ -1,125 +1,80 @@
-import {
-  useEffect,
-  useState,
-} from "react";
+import {useEffect,useState,} from "react";
 
-import {
-  getTasks,
-  createTask,
-  updateTask,
-  deleteTask,
-} from "../services/task.service";
+import {getTasks,createTask,updateTask,deleteTask,} from "../services/task.service";
+import {getProjects} from "../services/project.service";
 
 interface Task {
   _id: string;
   title: string;
   description: string;
-  status:
-    | "TODO"
-    | "IN_PROGRESS"
-    | "DONE";
-
-  priority:
-    | "LOW"
-    | "MEDIUM"
-    | "HIGH"
-    | "CRITICAL";
-
+  status:| "TODO"| "IN_PROGRESS"| "DONE";
+  priority: "LOW"| "MEDIUM"| "HIGH"| "CRITICAL";
   projectId: string;
 }
 
+interface Project{
+    _id: string;
+    title: string;
+}
+
 function TasksPage() {
-  const [tasks, setTasks] =
-    useState<Task[]>([]);
+  const [tasks, setTasks] = useState<Task[]>([]);
 
-  const [loading, setLoading] =
-    useState(true);
+  const [loading, setLoading] = useState(true);
 
-  const [title, setTitle] =
-    useState("");
+  const [title, setTitle] = useState("");
 
-  const [description,
-    setDescription] =
-    useState("");
+  const [description,setDescription] = useState("");
 
-  const [projectId,
-    setProjectId] =
-    useState("");
+  const [projectId,setProjectId] = useState("");
 
-  const [priority,
-    setPriority] =
-    useState("MEDIUM");
+  const [priority,setPriority] = useState("MEDIUM");
 
-  useEffect(() => {
-    fetchTasks();
-  }, []);
+  const [projects,setProjects] = useState<Project[]>([]);
 
-  const fetchTasks =
-    async () => {
+  useEffect(() => {fetchTasks(); fetchProjects();},[]);
 
+  const fetchTasks = async () => {
       try {
+        const response = await getTasks();
 
-        const response =
-          await getTasks();
-
-        setTasks(
-          response.tasks
-        );
+        setTasks(response.tasks);
 
       } catch (error) {
-
         console.error(error);
-
       } finally {
-
         setLoading(false);
-
       }
     };
 
+    const fetchProjects = async () => {
+        try{
+            const response = await getProjects();
+            setProjects(response.projects);
+        }catch(error){
+            console.error(error);
+        }
+    };
   const handleCreateTask =
     async () => {
-
       try {
-
-        await createTask({
-          title,
-          description,
-          projectId,
-          priority,
-        });
-
+        await createTask({title,description,projectId,priority,});
         setTitle("");
         setDescription("");
-
         fetchTasks();
-
       } catch (error) {
-
         console.error(error);
-
       }
     };
-
-  const handleStatusChange =
-    async (
+  const handleStatusChange = async (
       taskId: string,
       status: string
     ) => {
-
       try {
-
-        await updateTask(
-          taskId,
-          { status }
-        );
-
+        await updateTask(taskId,{ status });
         fetchTasks();
-
       } catch (error) {
-
         console.error(error);
-
       }
     };
 
@@ -127,19 +82,13 @@ function TasksPage() {
     async (
       taskId: string
     ) => {
-
       try {
-
         await deleteTask(
           taskId
         );
-
         fetchTasks();
-
       } catch (error) {
-
         console.error(error);
-
       }
     };
 
@@ -149,13 +98,10 @@ function TasksPage() {
 
   return (
     <div className="p-6">
-
       <h1 className="text-3xl font-bold mb-6">
         Tasks
       </h1>
-
       <div className="space-y-2 mb-8">
-
         <input
           type="text"
           placeholder="Task Title"
@@ -167,7 +113,6 @@ function TasksPage() {
           }
           className="border p-2 w-full"
         />
-
         <input
           type="text"
           placeholder="Description"
@@ -180,18 +125,34 @@ function TasksPage() {
           className="border p-2 w-full"
         />
 
-        <input
-          type="text"
-          placeholder="Project ID"
-          value={projectId}
-          onChange={(e) =>
-            setProjectId(
-              e.target.value
-            )
-          }
-          className="border p-2 w-full"
-        />
+        <select
+  value={projectId}
+  onChange={(e) =>
+    setProjectId(
+      e.target.value
+    )
+  }
+  className="border p-2 w-full"
+>
 
+  <option value="">
+    Select Project
+  </option>
+
+  {projects.map(
+    (project) => (
+
+      <option
+        key={project._id}
+        value={project._id}
+      >
+        {project.title}
+      </option>
+
+    )
+  )}
+
+</select>
         <select
           value={priority}
           onChange={(e) =>
@@ -211,13 +172,7 @@ function TasksPage() {
           onClick={
             handleCreateTask
           }
-          className="
-            bg-black
-            text-white
-            px-4
-            py-2
-            rounded
-          "
+          className="bg-black text-white px-4 py-2 rounded"
         >
           Create Task
         </button>
@@ -225,16 +180,7 @@ function TasksPage() {
       </div>
 
       {tasks.map((task) => (
-
-        <div
-          key={task._id}
-          className="
-            border
-            p-4
-            rounded
-            mb-3
-          "
-        >
+        <div key={task._id} className="border p-4 rounded mb-3">
 
           <h2 className="font-bold">
             {task.title}
@@ -243,17 +189,11 @@ function TasksPage() {
           <p>
             {task.description}
           </p>
-
           <p>
-            Status:
-            {" "}
-            {task.status}
+            Status:{" "}{task.status}
           </p>
-
           <p>
-            Priority:
-            {" "}
-            {task.priority}
+            Priority:{" "}{task.priority}
           </p>
 
           <div className="flex gap-2 mt-3">
@@ -265,13 +205,7 @@ function TasksPage() {
                   "DONE"
                 )
               }
-              className="
-                bg-green-500
-                text-white
-                px-3
-                py-1
-                rounded
-              "
+              className="bg-green-500 text-white px-3 py-1 rounded"
             >
               Done
             </button>
@@ -282,13 +216,7 @@ function TasksPage() {
                   task._id
                 )
               }
-              className="
-                bg-red-500
-                text-white
-                px-3
-                py-1
-                rounded
-              "
+              className="bg-red-500 text-white px-3 py-1 rounded"
             >
               Delete
             </button>
@@ -297,7 +225,6 @@ function TasksPage() {
 
         </div>
       ))}
-
     </div>
   );
 }
