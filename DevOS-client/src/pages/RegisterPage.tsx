@@ -62,10 +62,10 @@ function RegisterPage() {
 
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1.5">Full Name</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1.5">Full Name *</label>
             <input
               type="text"
-              placeholder="John Doe"
+              placeholder="Your name"
               value={name}
               onChange={(e) => setName(e.target.value)}
               className="w-full bg-[#FAF6F0] border border-[#f0eadd] px-4 py-3 rounded text-[15px] focus:outline-none focus:border-gray-400 transition"
@@ -73,7 +73,7 @@ function RegisterPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1.5">Email Address</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1.5">Email Address *</label>
             <input
               type="email"
               placeholder="name@example.com"
@@ -84,7 +84,7 @@ function RegisterPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1.5">Password</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1.5">Password *</label>
             <input
               type="password"
               placeholder="••••••••"
@@ -99,7 +99,7 @@ function RegisterPage() {
               <label className="block text-sm font-medium text-gray-700 mb-1.5">GitHub</label>
               <input
                 type="text"
-                placeholder="Username (opt)"
+                placeholder="Username"
                 value={githubUsername}
                 onChange={(e) => setGithubUsername(e.target.value)}
                 className="w-full bg-[#FAF6F0] border border-[#f0eadd] px-4 py-3 rounded text-[14px] focus:outline-none focus:border-gray-400 transition"
@@ -109,7 +109,7 @@ function RegisterPage() {
               <label className="block text-sm font-medium text-gray-700 mb-1.5">LeetCode</label>
               <input
                 type="text"
-                placeholder="Username (opt)"
+                placeholder="Username"
                 value={leetcodeUsername}
                 onChange={(e) => setLeetcodeUsername(e.target.value)}
                 className="w-full bg-[#FAF6F0] border border-[#f0eadd] px-4 py-3 rounded text-[14px] focus:outline-none focus:border-gray-400 transition"
