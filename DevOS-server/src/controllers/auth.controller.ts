@@ -22,6 +22,8 @@ export const registerUser = async(req: Request, res:Response) => {
             name: validatedData.name,
             email: validatedData.email,
             password: hashedPassword,
+            githubUsername: validatedData.githubUsername,
+            leetcodeUsername: validatedData.leetcodeUsername,
         });
 
         res.status(201).json({
