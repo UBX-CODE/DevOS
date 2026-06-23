@@ -1,4 +1,4 @@
-import {Routes, Route} from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import DashboardLayout from "../layouts/DashboardLayout";
 
@@ -11,16 +11,16 @@ import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 
 const AppRoutes = () => {
-    return(
+    return (
         <Routes>
-            <Route path = "/login" element = {<LoginPage />} />
-            <Route path = "/register" element = {<RegisterPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
 
-            <Route element = {<DashboardLayout />}>
-                <Route path = "/" element = {<DashboardPage />} />
-                <Route path = "/projects" element = {<ProjectsPage />} />
-                <Route path = "/tasks" element = {<TasksPage />} />
-                <Route path = "/settings" element = {<SettingsPage />} />
+            <Route element={<DashboardLayout />}>
+                <Route path="/" element={<DashboardPage />} />
+                <Route path="/projects" element={<ProjectsPage />} />
+                <Route path="/tasks" element={<TasksPage />} />
+                <Route path="/settings" element={<SettingsPage />} />
             </Route>
         </Routes>
     );

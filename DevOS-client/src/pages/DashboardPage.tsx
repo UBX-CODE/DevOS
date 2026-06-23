@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getDashboardStats } from "../services/dashboard.service";
-import { getGithubProfile , getGithubRepos} from "../services/github.service";
+import { getGithubProfile, getGithubRepos } from "../services/github.service";
 import { getLeetcodeProfile } from "../services/leetcode.service";
 
 interface DashboardStats {
@@ -56,14 +56,14 @@ function DashboardPage() {
         }
       };
 
-      const fetchGithubRepos = async () => {
-    try {
-      const response = await getGithubRepos();
-      setRepos(response.repos);
-    } catch (error) {
-      console.error(error);
-    }
-};
+    const fetchGithubRepos = async () => {
+      try {
+        const response = await getGithubRepos();
+        setRepos(response.repos);
+      } catch (error) {
+        console.error(error);
+      }
+    };
     fetchGithubRepos();
     fetchLeetcodeProfile();
     fetchGithubProfile();
@@ -81,68 +81,68 @@ function DashboardPage() {
         Dashboard
       </h1>
       {githubData && (
-      <div className="bg-white shadow rounded-xl p-6 mb-8">
-        <div className="flex items-center gap-4 mb-6">
-          <img src={githubData.avatar_url} alt="Avatar" className=" w-24 h-24 rounded-full" />
-          <div>
-            <h2 className=" text-2xl font-bold ">
-              {githubData.name}
-            </h2>
-            <p className="text-gray-500">
-              @{githubData.login}
-            </p>
+        <div className="bg-white shadow rounded-xl p-6 mb-8">
+          <div className="flex items-center gap-4 mb-6">
+            <img src={githubData.avatar_url} alt="Avatar" className=" w-24 h-24 rounded-full" />
+            <div>
+              <h2 className=" text-2xl font-bold ">
+                {githubData.name}
+              </h2>
+              <p className="text-gray-500">
+                @{githubData.login}
+              </p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 ">
+
+            <div className="border p-4 rounded">
+              <h3>Repos</h3>
+              <p>{githubData.public_repos}</p>
+            </div>
+
+            <div className="border p-4 rounded">
+              <h3>Followers</h3>
+              <p>{githubData.followers}</p>
+            </div>
+
+            <div className="border p-4 rounded">
+              <h3>Following</h3>
+              <p>{githubData.following}</p>
+            </div>
+
+            <div className="border p-4 rounded">
+              <h3>Profile</h3>
+              <a href={githubData.html_url} target="_blank" rel="noreferrer" className="text-blue-500">Open</a>
+            </div>
           </div>
         </div>
-
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 ">
-
-          <div className="border p-4 rounded">
-            <h3>Repos</h3>
-            <p>{githubData.public_repos}</p>
-          </div>
-
-          <div className="border p-4 rounded">
-            <h3>Followers</h3>
-            <p>{githubData.followers}</p>
-          </div>
-
-          <div className="border p-4 rounded">
-            <h3>Following</h3>
-            <p>{githubData.following}</p>
-          </div>
-
-          <div className="border p-4 rounded">
-            <h3>Profile</h3>
-            <a href={githubData.html_url} target="_blank" rel="noreferrer" className="text-blue-500">Open</a>
-          </div>
-        </div>
-      </div>
       )}
 
       {repos.length > 0 && (
 
-<div className="bg-white shadow rounded-xl p-6 mt-6">
-  <h2 className="text-2xl font-bold mb-4">Recent Repositories</h2>
-  <div className="space-y-3">
-    {repos.slice(0, 5).map((repo) => (
-      <a
-        key={repo.id}
-        href={repo.html_url}
-        target="_blank"
-        rel="noreferrer"
-        className="block border rounded-lg p-4 hover:bg-gray-50">
-        <div className=" flex justify-between items-center">
-          <div>
-            <h3 className="font-semibold">{repo.name}</h3>
-            <p className="text-sm text-gray-500">{repo.language || "No Language"}</p>
+        <div className="bg-white shadow rounded-xl p-6 mt-6">
+          <h2 className="text-2xl font-bold mb-4">Recent Repositories</h2>
+          <div className="space-y-3">
+            {repos.slice(0, 5).map((repo) => (
+              <a
+                key={repo.id}
+                href={repo.html_url}
+                target="_blank"
+                rel="noreferrer"
+                className="block border rounded-lg p-4 hover:bg-gray-50">
+                <div className=" flex justify-between items-center">
+                  <div>
+                    <h3 className="font-semibold">{repo.name}</h3>
+                    <p className="text-sm text-gray-500">{repo.language || "No Language"}</p>
+                  </div>
+                  <span>⭐ {repo.stargazers_count}</span>
+                </div>
+              </a>
+            ))}
           </div>
-          <span>⭐ {repo.stargazers_count}</span>
         </div>
-      </a>
-    ))}
-  </div>
-</div>
-)}
+      )}
 
       {leetcodeData && (
 
