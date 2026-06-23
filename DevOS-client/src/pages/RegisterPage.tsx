@@ -12,7 +12,6 @@ function RegisterPage() {
   const [password, setPassword] = useState("");
   const [githubUsername, setGithubUsername] = useState("");
   const [leetcodeUsername, setLeetcodeUsername] = useState("");
-  const [message, setMessage] = useState("");
 
   const handleRegister = async () => {
     try {
@@ -152,11 +151,6 @@ function RegisterPage() {
             Continue with Google
           </a>
 
-          {message && (
-            <div className="mt-4 p-3 bg-[#FAF6F0] text-[#111] text-sm font-medium rounded border border-[#f0eadd] text-center">
-              {message}
-            </div>
-          )}
         </div>
 
         <p className="text-center text-sm text-gray-500 mt-8 font-medium">
