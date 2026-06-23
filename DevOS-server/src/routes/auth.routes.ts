@@ -11,18 +11,9 @@ router.post("/register", registerUser);
 router.post("/login", loginUser);
 router.put("/profile", authMiddleware, updateProfile);
 router.get("/me", authMiddleware, getProfile);
-router.get(
-  "/google",
-  passport.authenticate(
-    "google",
-    {
-      scope: [
-        "profile",
-        "email",
-      ],
-    }
-  )
-);
+router.get("/google",passport.authenticate("google",{
+      scope:["profile","email"],
+}));
 
 router.get(
   "/google/callback",
