@@ -35,7 +35,7 @@ router.get(
       );
 
     res.redirect(
-      `http://localhost:5173/oauth-success?token=${token}`
+      `https://dev-os-iota.vercel.app/oauth-success?token=${token}`
     );
 
   }
