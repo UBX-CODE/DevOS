@@ -11,5 +11,5 @@
     "forceConsistentCasingInFileNames": true
   },
 
-  "include": ["src"]
+  "include": ["src", "../DevOS-client/settings.service.ts"]
 }
