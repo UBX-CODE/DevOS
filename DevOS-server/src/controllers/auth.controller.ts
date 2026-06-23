@@ -84,3 +84,42 @@ export const loginUser = async(req: Request, res: Response) => {
         });
     }
 };
+
+export const updateProfile =
+  async (
+    req: Request,
+    res: Response
+  ) => {
+
+    try {
+
+      const user =
+        await User.findByIdAndUpdate(
+          req.user?.userId,
+          {
+            name: req.body.name,
+            githubUsername:
+              req.body.githubUsername,
+
+            leetcodeUsername:
+              req.body.leetcodeUsername,
+          },
+          {
+            new: true,
+          }
+        );
+
+      return res.status(200).json({
+        success: true,
+        user,
+      });
+
+    } catch (error: any) {
+
+      return res.status(500).json({
+        success: false,
+        message: error.message,
+      });
+
+    }
+};
