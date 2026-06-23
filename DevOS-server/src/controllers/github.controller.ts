@@ -34,3 +34,31 @@ export const getGithubProfile = async (req: Request, res: Response) => {
         })
     }
 };
+
+export const getGithubRepos = async (req: Request, res:Response) => {
+    try{
+        const user = await User.findById(req.user?.userId);
+        if(!user?.githubUsername){
+            return res.status(400).json({
+                success:false,
+                message:"User not found",
+            })
+        }
+        const response = await axios.get(`https://api.github.com/users/${user.githubUsername}/repos`,{
+            headers: {
+                Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+                Accept:"application/vnd.github+json"
+            }
+        });
+
+        return res.status(200).json({
+            success:true,
+            repos: response.data,
+        });
+    }catch(error:any){
+        return res.status(500).json({
+            success:false,
+            message:error.message
+        });
+    }
+};
