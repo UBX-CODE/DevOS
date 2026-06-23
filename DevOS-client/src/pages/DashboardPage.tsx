@@ -177,8 +177,16 @@ function DashboardPage() {
                 <FiGithub size={20} className="text-[#111]"/>
                 <h2 className="text-xl font-serif font-medium text-[#111]">Recent Repositories</h2>
               </div>
+              <a
+                href={`https://github.com/${githubData?.login}`}
+                target="_blank"
+                rel="noreferrer"
+                className="text-sm text-gray-500 hover:text-black"
+              >
+                View All →
+              </a>
               <div className="space-y-3">
-                {repos.slice(0, 7).map((repo) => (
+                {repos.slice(0, 5).map((repo) => (
                   <a
                     key={repo.id}
                     href={repo.html_url}
@@ -189,7 +197,15 @@ function DashboardPage() {
                     <div className="flex justify-between items-center mb-1">
                       <h3 className="font-medium text-[#111] text-[15px] truncate w-[70%]">{repo.name}</h3>
                     </div>
-                    <p className="text-[13px] text-gray-500 font-light">{repo.language || "No Language"}</p>
+                    <p className="text-[13px] text-gray-500 line-clamp-2 font-light">{repo.description}</p>
+                    <div className="flex justify-between items-center text-xs text-gray-500">
+                      <span>
+                        {repo.language || "Unknown"}
+                      </span>
+                      <span>
+                        {new Date(repo.updated_at).toLocaleDateString()}
+                      </span>
+                    </div>
                   </a>
                 ))}
               </div>

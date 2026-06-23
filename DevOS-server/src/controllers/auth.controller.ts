@@ -4,7 +4,7 @@ import {hashPassword} from "../services/auth.service";
 import {User} from "../models/User";
 import { generateToken } from "../services/jwt.service";
 import bcrypt from "bcryptjs";
-import { AnyCnameRecord } from "node:dns";
+
 
 export const registerUser = async(req: Request, res:Response) => {
     try{
@@ -92,7 +92,7 @@ export const updateProfile =
     try {
       const user =
         await User.findByIdAndUpdate(
-          req.user?.userId,
+          (req.user as any)?.userId,
           {
             name: req.body.name,
             githubUsername:
@@ -131,7 +131,7 @@ export const getProfile =
 
       const user =
         await User.findById(
-          req.user?.userId
+          (req.user as any)?.userId
         ).select("-password");
 
       return res.status(200).json({

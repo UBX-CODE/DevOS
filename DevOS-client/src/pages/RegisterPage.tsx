@@ -124,6 +124,20 @@ function RegisterPage() {
             CREATE ACCOUNT
           </button>
 
+          <div className="relative flex items-center py-2">
+            <div className="flex-grow border-t border-[#f0eadd]"></div>
+            <span className="flex-shrink-0 mx-4 text-gray-400 text-[11px] font-medium tracking-widest uppercase">Or</span>
+            <div className="flex-grow border-t border-[#f0eadd]"></div>
+          </div>
+
+          <a
+            href="http://localhost:5000/api/auth/google"
+            className="flex items-center justify-center gap-3 w-full bg-white border border-[#f0eadd] text-[#111] py-3.5 rounded text-[13px] font-medium hover:bg-[#FAF6F0] transition shadow-sm"
+          >
+            <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" className="w-4 h-4" />
+            Continue with Google
+          </a>
+
           {message && (
             <div className="mt-4 p-3 bg-[#FAF6F0] text-[#111] text-sm font-medium rounded border border-[#f0eadd] text-center">
               {message}
