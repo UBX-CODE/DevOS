@@ -1,4 +1,4 @@
-import {createContext,useContext,useState,type ReactNode,} from "react";
+import {createContext,useContext,useState,type ReactNode} from "react";
 
 interface AuthContextType {
   token: string | null;
@@ -23,7 +23,6 @@ export const AuthProvider = ({children,}: AuthProviderProps) => {
   const logout = () => {
     localStorage.removeItem("token");
     setToken(null);
-    window.location.href = "/login";
   };
 
   return (

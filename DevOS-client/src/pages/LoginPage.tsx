@@ -94,7 +94,7 @@ function LoginPage() {
           </div>
 
           <a
-            href="http://localhost:5000/api/auth/google"
+            href={`${import.meta.env.VITE_API_URL}/auth/google`}
             className="flex items-center justify-center gap-3 w-full bg-white border border-[#f0eadd] text-[#111] py-3.5 rounded text-[13px] font-medium hover:bg-[#FAF6F0] transition shadow-sm"
           >
             <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" className="w-4 h-4" />
