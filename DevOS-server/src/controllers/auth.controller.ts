@@ -4,6 +4,7 @@ import {hashPassword} from "../services/auth.service";
 import {User} from "../models/User";
 import { generateToken } from "../services/jwt.service";
 import bcrypt from "bcryptjs";
+import { AnyCnameRecord } from "node:dns";
 
 export const registerUser = async(req: Request, res:Response) => {
     try{
@@ -35,7 +36,7 @@ export const registerUser = async(req: Request, res:Response) => {
                 _id: user._id,
             },
         });
-    }catch(error){
+    }catch(error:any){
       console.log(error);
         res.status(400).json({
             success:false,
