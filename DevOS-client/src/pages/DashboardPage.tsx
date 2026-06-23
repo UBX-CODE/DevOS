@@ -67,7 +67,7 @@ const fetchLeetcodeProfile =
   }
 
   return (
-    <div className="p-6">
+    <div className="grid grid-cols-1vlg:frid-cols-2 gap-6">
       <h1 className="text-3xl font-bold mb-6">
         Dashboard
       </h1>
@@ -153,6 +153,40 @@ const fetchLeetcodeProfile =
         </div>
 
       </div>
+      <div className="
+  bg-white
+  rounded-xl
+  shadow
+  p-6
+  mt-8
+">
+  <h2 className="font-bold mb-3">
+    Productivity Score
+  </h2>
+
+  <div className="
+    w-full
+    bg-gray-200
+    rounded-full
+    h-4
+  ">
+    <div
+      className="
+        bg-green-500
+        h-4
+        rounded-full
+      "
+      style={{
+        width:
+          `${stats?.completionRate || 0}%`
+      }}
+    />
+  </div>
+
+  <p className="mt-2">
+    {stats?.completionRate}% Complete
+  </p>
+</div>
     </div>
   );
 }
