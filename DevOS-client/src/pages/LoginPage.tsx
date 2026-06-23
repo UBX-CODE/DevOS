@@ -1,4 +1,5 @@
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { loginUser } from "../services/auth.service";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
@@ -19,7 +20,7 @@ function LoginPage() {
 
       login(response.token);
 
-      alert("Login Successful!");
+      toast.success("Login successful");
       navigate("/Dashboard");
     } catch (error: any) {
       console.error(error);

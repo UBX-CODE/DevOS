@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { updateProfile, getProfile } from "../services/settings.service";
 import { FiSettings, FiUser, FiGithub, FiCode } from "react-icons/fi";
-
+import toast from "react-hot-toast";
 function SettingsPage() {
   const [name, setName] = useState("");
   const [githubUsername, setGithubUsername] = useState("");
@@ -12,9 +12,11 @@ function SettingsPage() {
     try {
       await updateProfile({ name, githubUsername, leetcodeUsername });
       setMessage("Profile Updated Successfully");
+      toast.success("Profile updated successfully");
       setTimeout(() => setMessage(""), 3000);
     } catch (error) {
       console.error(error);
+      toast.error("Failed to update profile");
     }
   };
 

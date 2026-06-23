@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { registerUser } from "../services/auth.service";
 import { motion } from "framer-motion";
+import toast from "react-hot-toast";
 
 function RegisterPage() {
   const navigate = useNavigate();
@@ -22,12 +23,25 @@ function RegisterPage() {
         githubUsername,
         leetcodeUsername,
       });
+      toast.success(
+    "Account created successfully"
+  );
 
-      setMessage("Registration Successful");
-      setTimeout(() => navigate("/login"), 1000);
-    } catch (error) {
-      console.error(error);
-    }
+  navigate("/login");
+    } catch (error: any) {
+
+  if (
+    error.response?.status === 409
+  ) {
+    toast.error(
+      "Email already registered"
+    );
+  } else {
+    toast.error(
+      "Registration failed"
+    );
+  }
+  }
   };
 
   return (
