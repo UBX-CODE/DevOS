@@ -1,112 +1,55 @@
-import { useState } from "react";
-import { updateProfile } from "../services/settings.service";
+import { useState , useEffect } from "react";
+import { updateProfile , getProfile} from "../services/settings.service";
 
 function SettingsPage() {
 
-  const [name, setName] =
-    useState("");
+  const [name, setName] = useState("");
+  const [githubUsername, setGithubUsername] = useState("");
+  const [leetcodeUsername, setLeetcodeUsername] = useState("");
+  const [message, setMessage] = useState("");
 
-  const [githubUsername,
-    setGithubUsername] =
-    useState("");
-
-  const [leetcodeUsername,
-    setLeetcodeUsername] =
-    useState("");
-
-  const [message,
-    setMessage] =
-    useState("");
-
-  const handleSave =
-    async () => {
-
+  const handleSave = async () => {
       try {
-
-        await updateProfile({
-          name,
-          githubUsername,
-          leetcodeUsername,
-        });
-
-        setMessage(
-          "Profile Updated Successfully"
-        );
-
+        await updateProfile({  name, githubUsername, leetcodeUsername, });
+        setMessage("Profile Updated Successfully");
       } catch (error) {
-
         console.error(error);
-
       }
     };
 
+    useEffect(() => {
+
+  const fetchProfile = async () => {
+      try {
+        const response = await getProfile();
+        setName(response.user.name);
+        setGithubUsername(response.user.githubUsername || "");
+        setLeetcodeUsername(response.user.leetcodeUsername || "");
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+  fetchProfile();
+
+}, []);
   return (
     <div className="max-w-2xl">
-
-      <h1 className="
-        text-3xl
-        font-bold
-        mb-6
-      ">
-        Settings
-      </h1>
-
-      <div className="
-        bg-white
-        p-6
-        rounded-xl
-        shadow
-        space-y-4
-      ">
-
+      <h1 className=" text-3xl font-bold mb-6">Settings</h1>
+      <div className="bg-white p-6 rounded-xl shadow space-y-4">
         <div>
-
-          <label>
-            Name
-          </label>
-
+          <label>Name</label>
           <input
             type="text"
             value={name}
-            onChange={(e) =>
-              setName(
-                e.target.value
-              )
-            }
-            className="
-              w-full
-              border
-              p-2
-              rounded
-            "
-          />
+            onChange={(e) => setName(e.target.value)} className="w-full border p-2 rounded"/>
 
         </div>
-
         <div>
-
-          <label>
-            GitHub Username
-          </label>
-
-          <input
-            type="text"
-            value={
-              githubUsername
-            }
-            onChange={(e) =>
-              setGithubUsername(
-                e.target.value
-              )
-            }
-            className="
-              w-full
-              border
-              p-2
-              rounded
-            "
-          />
-
+          <label> GitHub Username</label>
+          <input type="text" value={githubUsername}
+            onChange={(e) => setGithubUsername(e.target.value)}
+            className="w-full border p-2 rounded"/>
         </div>
 
         <div>
@@ -125,16 +68,9 @@ function SettingsPage() {
                 e.target.value
               )
             }
-            className="
-              w-full
-              border
-              p-2
-              rounded
-            "
+            className="w-full border p-2 rounded"
           />
-
         </div>
-
         <button
           onClick={handleSave}
           className="
@@ -147,7 +83,6 @@ function SettingsPage() {
         >
           Save Changes
         </button>
-
         {message && (
           <p className="
             text-green-600
@@ -155,9 +90,7 @@ function SettingsPage() {
             {message}
           </p>
         )}
-
       </div>
-
     </div>
   );
 }

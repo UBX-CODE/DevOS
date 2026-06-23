@@ -7,12 +7,11 @@ export const updateProfile = async (
     leetcodeUsername: string;
   }
 ) => {
-
-  const response =
-    await api.put(
-      "/auth/profile",
-      data
-    );
-
+  const response = await api.put("/auth/profile", data);
   return response.data;
 };
+
+export const getProfile = async() => {
+  const response = await api.get("/auth/me");
+  return response.data;
+}
