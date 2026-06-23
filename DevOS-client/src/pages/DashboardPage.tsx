@@ -3,6 +3,7 @@ import { getDashboardStats } from "../services/dashboard.service";
 import { getGithubProfile, getGithubRepos } from "../services/github.service";
 import { getLeetcodeProfile } from "../services/leetcode.service";
 import { FiGithub, FiCode, FiActivity, FiFolder, FiCheckSquare } from "react-icons/fi";
+import GithubContribution from "../components/GithubContribution";
 
 interface DashboardStats {
   totalProjects: number;
@@ -130,6 +131,7 @@ function DashboardPage() {
                   </div>
                 </div>
               </div>
+              <GithubContribution username={githubData.login} />
             </div>
           )}
 
