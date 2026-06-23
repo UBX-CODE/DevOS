@@ -18,9 +18,8 @@ const AppRoutes = () => {
         <Routes>
             <Route path="/login" element={<PublicRoute><LoginPage /></PublicRoute>} />
             <Route path="/register" element={<PublicRoute><RegisterPage /></PublicRoute>} />
-            <Route path="/oauth-success" element={<OAuthSuccessPage />} />
             <Route path="/" element={<LandingPage />} />
-
+            <Route path="/oauth-success" element={<OAuthSuccessPage />}/>
             <Route element={<ProtectedRoute><DashboardLayout /></ProtectedRoute>}>
                 <Route path="/dashboard" element={<DashboardPage />} />
                 <Route path="/projects" element={<ProjectsPage />} />

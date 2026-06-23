@@ -1,27 +1,42 @@
 import { useEffect } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
-function OAuthSuccessPage() {
-  const [searchParams] = useSearchParams();
+const OAuthSuccessPage = () => {
+
   const navigate = useNavigate();
-  const { login } = useAuth();
 
   useEffect(() => {
-    const token = searchParams.get("token");
+
+    const params =
+      new URLSearchParams(
+        window.location.search
+      );
+
+    const token =
+      params.get("token");
+
     if (token) {
-      login(token);
-      navigate("/dashboard", { replace: true });
+
+      localStorage.setItem(
+        "token",
+        token
+      );
+
+      navigate("/dashboard");
+
     } else {
-      navigate("/login", { replace: true });
+
+      navigate("/login");
+
     }
-  }, [searchParams, navigate, login]);
+
+  }, [navigate]);
 
   return (
-    <div className="min-h-screen bg-[#FAF6F0] flex items-center justify-center">
-      <div className="w-8 h-8 border-4 border-gray-200 border-t-[#111] rounded-full animate-spin"></div>
-    </div>
+    <h1>
+      Logging you in...
+    </h1>
   );
-}
+};
 
 export default OAuthSuccessPage;
