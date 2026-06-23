@@ -5,7 +5,7 @@ import { useAuth } from "../context/AuthContext";
 const Sidebar = () => {
     const { logout } = useAuth();
     return (
-        <aside className="w-64 border-r min-h-screen p-4 flex flex-col flex-1">
+        <aside className="w-64 border-r min-h-screen p-4 flex flex-col">
             <h1 className="text-2xl font-bold mb-8">DevOS</h1>
 
             <nav className = "flex flex-col gap-4">
@@ -17,20 +17,7 @@ const Sidebar = () => {
 
                 <NavLink to="/settings" className={({isActive}) => `flex items-center gap-3 rounded-lg p-3 ${isActive ? "bg-black text-white" : "hover:bg-gray-100"}`}><FiSettings/>Settings</NavLink>
             </nav>
-            <button
-    onClick={logout}
-    className="
-        mt-8
-        w-full
-        bg-red-500
-        text-white
-        p-3
-        rounded-lg
-        hover:bg-red-600
-    "
->
-    Logout
-</button>
+            <button onClick={logout} className=" mt-8 w-full bg-red-500 text-white p-3 rounded-lg hover:bg-red-600"> Logout</button>
         </aside>
     );
 };

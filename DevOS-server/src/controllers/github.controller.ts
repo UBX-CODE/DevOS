@@ -13,13 +13,21 @@ export const getGithubProfile = async (req: Request, res: Response) => {
                 message: "Github username not found"
             });
         }
-        const response = await axios.get(`https://api.github.com/users/${user.githubUsername}`);
+        const response = await axios.get(`https://api.github.com/users/${user.githubUsername}`,{
+            headers: {
+                Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+                Accept:"application/vnd.github+json"
+            }
+        });
         return res.status(200).json({
             success:true,
             github: response.data
         });
         
     }catch(error:any){
+        console.log("GitHub Error:");
+        console.log(error.response?.data);
+        console.log(error.message);
         return res.status(500).json({
             success:false,
             message:error.message
