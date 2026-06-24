@@ -82,8 +82,8 @@ function DashboardPage() {
           { label: "Total Projects", value: stats?.totalProjects, icon: <FiFolder size={20} className="text-gray-400" /> },
           { label: "Total Tasks", value: stats?.totalTasks, icon: <FiCheckSquare size={20} className="text-gray-400" /> },
           { label: "Completed", value: stats?.completedTasks, icon: <FiCheckSquare size={20} className="text-[#111]" /> },
-          { label: "Pending", value: stats?.pendingTasks, icon: <FiActivity size={20} className="text-orange-400" /> },
-          { label: "Completion", value: `${stats?.completionRate}%`, icon: <FiActivity size={20} className="text-green-600" /> }
+          { label: "Pending", value: stats?.pendingTasks, icon: <FiActivity size={20} className="text-gray-400" /> },
+          { label: "Completion", value: `${stats?.completionRate}%`, icon: <FiActivity size={20} className="text-[#111]" /> }
         ].map((stat, idx) => (
           <div key={idx} className="bg-white border border-[#f0eadd] shadow-sm rounded-xl p-6 flex flex-col justify-between">
             <div className="flex items-center justify-between mb-4">
@@ -95,10 +95,9 @@ function DashboardPage() {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         
         {/* Left Column (Main Integrations) */}
-        <div className="lg:col-span-2 space-y-8">
           
           {/* GitHub Profile */}
           {githubData && (
@@ -136,50 +135,10 @@ function DashboardPage() {
             </div>
           )}
 
-          {/* LeetCode Analytics */}
-          {leetcodeData && (
-            <div className="bg-white border border-[#f0eadd] shadow-sm rounded-xl p-8 relative overflow-hidden">
-              <div className="absolute top-0 right-0 p-8 opacity-5">
-                <FiCode size={120} />
-              </div>
-              <div className="relative z-10">
-                <h2 className="text-xl font-serif font-medium text-[#111] mb-6">LeetCode Analytics</h2>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  {leetcodeData.submitStats.acSubmissionNum.map((item: any) => (
-                    <div key={item.difficulty} className="border border-[#f0eadd] bg-[#FAF6F0] rounded-lg p-4">
-                      <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">{item.difficulty}</h3>
-                      <p className="text-2xl font-serif text-[#111]">{item.count}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Productivity Score */}
-          <TaskStatusChart
-  completed={stats?.completedTasks || 0}
-  pending={stats?.pendingTasks || 0}
-/>
-          <div className="bg-white border border-[#f0eadd] shadow-sm rounded-xl p-8">
-            <div className="flex justify-between items-end mb-4">
-              <h2 className="text-xl font-serif font-medium text-[#111]">Productivity Score</h2>
-              <span className="text-sm font-medium text-gray-600">{stats?.completionRate || 0}%</span>
-            </div>
-            <div className="w-full bg-[#FAF6F0] border border-[#f0eadd] rounded-full h-3 overflow-hidden">
-              <div
-                className="bg-[#1f1e1e] h-3 rounded-full transition-all duration-1000"
-                style={{ width: `${stats?.completionRate || 0}%` }}
-              />
-            </div>
-          </div>
-
-        </div>
-
-        {/* Right Column (Recent Repositories) */}
+                  {/* Right Column (Recent Repositories) */}
         <div className="lg:col-span-1">
           {repos.length > 0 && (
-            <div className="bg-white border border-[#f0eadd] shadow-sm rounded-xl p-6 h-full">
+            <div className="bg-white border border-[#f0eadd] shadow-sm rounded-xl p-6">
               <div className="flex items-center gap-2 mb-6">
                 <FiGithub size={20} className="text-[#111]"/>
                 <h2 className="text-xl font-serif font-medium text-[#111]">Recent Repositories</h2>
@@ -219,6 +178,34 @@ function DashboardPage() {
             </div>
           )}
         </div>
+
+          {/* LeetCode Analytics */}
+          {leetcodeData && (
+            <div className="bg-white border border-[#f0eadd] shadow-sm rounded-xl p-8 relative overflow-hidden">
+              <div className="absolute top-0 right-0 p-8 opacity-5">
+                <FiCode size={120} />
+              </div>
+              <div className="relative z-10">
+                <h2 className="text-xl font-serif font-medium text-[#111] mb-6">LeetCode Analytics</h2>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  {leetcodeData.submitStats.acSubmissionNum.map((item: any) => (
+                    <div key={item.difficulty} className="border border-[#f0eadd] bg-[#FAF6F0] rounded-lg p-4">
+                      <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">{item.difficulty}</h3>
+                      <p className="text-2xl font-serif text-[#111]">{item.count}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Productivity Score */}
+          <TaskStatusChart
+          completed={stats?.completedTasks || 0}
+          pending={stats?.pendingTasks || 0}
+          completionRate={stats?.completionRate || 0}
+          />
+          
       </div>
     </div>
   );
