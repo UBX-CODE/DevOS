@@ -4,6 +4,7 @@ import { getGithubProfile, getGithubRepos } from "../services/github.service";
 import { getLeetcodeProfile } from "../services/leetcode.service";
 import { FiGithub, FiCode, FiActivity, FiFolder, FiCheckSquare } from "react-icons/fi";
 import GithubContribution from "../components/GithubContribution";
+import TaskStatusChart from "../components/TaskStatusChart";
 
 interface DashboardStats {
   totalProjects: number;
@@ -156,6 +157,10 @@ function DashboardPage() {
           )}
 
           {/* Productivity Score */}
+          <TaskStatusChart
+  completed={stats?.completedTasks || 0}
+  pending={stats?.pendingTasks || 0}
+/>
           <div className="bg-white border border-[#f0eadd] shadow-sm rounded-xl p-8">
             <div className="flex justify-between items-end mb-4">
               <h2 className="text-xl font-serif font-medium text-[#111]">Productivity Score</h2>
