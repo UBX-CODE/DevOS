@@ -1,7 +1,4 @@
 <div align="center">
-
-  <img src="./DevOS-client/public/devos-illustration.png" alt="DevOS Illustration" width="300" style="margin-bottom: 20px;" />
-
   <h1 style="font-family: 'Courier New', Courier, monospace; font-weight: bold; margin-top: 20px;">
     DevOS
   </h1>
@@ -23,7 +20,7 @@
 
 <br/>
 
-## 🌟 Overview & Core Vision
+##  Overview & Core Vision
 
 Developers currently juggle multiple tools like GitHub, LeetCode, Notion, Trello, Google Tasks, Notes, and Resume Trackers. 
 
@@ -31,7 +28,7 @@ Developers currently juggle multiple tools like GitHub, LeetCode, Notion, Trello
 
 ---
 
-## 📸 Screenshots
+##  Screenshots
 
 ### Landing Page
 ![Landing Page](./DevOS-client/public/LandingPage.png)
@@ -41,9 +38,9 @@ Developers currently juggle multiple tools like GitHub, LeetCode, Notion, Trello
 
 ---
 
-## ✨ Key Features
+##  Key Features
 
-### 📊 The Dashboard
+###  The Dashboard
 Your daily command center built with a premium, minimalist UI inspired by Linear and Vercel.
 - **Top Stats Overview:** Instantly view Total Projects, Total Tasks, Completed, Pending, and Completion Rate.
 - **GitHub Integration:** Syncs your GitHub profile, showing repositories, followers, and an interactive contribution heatmap.
@@ -52,13 +49,13 @@ Your daily command center built with a premium, minimalist UI inspired by Linear
 - **Productivity Score:** A dynamic progress bar representing your task completion rate.
 - **Task Distribution Chart:** Visual breakdown of your completed vs. pending tasks via a modern Pie Chart.
 
-### 🔐 User Authentication
+###  User Authentication
 A robust and secure identity system featuring fluid framer-motion animations.
 - **Registration & Login:** Seamless auth flows with smooth UI transitions.
 - **JWT Authentication:** Protected routes ensuring privacy.
 - **Password Hashing:** Utilizing `bcrypt` for utmost security.
 
-### 📋 Project & Task Management
+###  Project & Task Management
 - **Lifecycle Management:** Create, Update, Delete, Archive projects.
 - **Task Tracking:** Priority, Due Date, Tags, Descriptions.
 - **Kanban Board:** Interactive drag-and-drop support across `Todo`, `In Progress`, `Review`, and `Done`.
