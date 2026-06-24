@@ -15,11 +15,7 @@ function LoginPage() {
   const handleLogin = async () => {
     try {
       const response = await loginUser({email,password,});
-
-      console.log("Response:", response);
-
       login(response.token);
-
       toast.success("Login successful");
       navigate("/Dashboard");
     } catch (error: any) {

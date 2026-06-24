@@ -6,20 +6,16 @@ import {Task} from "../models/Task";
 export const getDashboardStats = async (req:Request, res: Response) => {
     try{
         const userId = req.user?.userId;
-
         const totalProjects = await Project.countDocuments({
             userId,
         });
-
         const totalTasks = await Task.countDocuments({
             userId,
         });
-
         const completedTasks = await Task.countDocuments({
           userId,
           status: "DONE",
         });
-
         const pendingTasks = await Task.countDocuments({
             userId,
             status:{

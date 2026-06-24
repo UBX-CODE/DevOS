@@ -15,18 +15,9 @@ function RegisterPage() {
 
   const handleRegister = async () => {
     try {
-      await registerUser({
-        name,
-        email,
-        password,
-        githubUsername,
-        leetcodeUsername,
-      });
-      toast.success(
-    "Account created successfully"
-  );
-
-  navigate("/login");
+      await registerUser({ name, email, password, githubUsername, leetcodeUsername });
+      toast.success("Account created successfully");
+      navigate("/login");
     } catch (error: any) {
 
   if (

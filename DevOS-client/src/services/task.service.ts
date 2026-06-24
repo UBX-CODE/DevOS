@@ -3,7 +3,6 @@ import api from "../api/axios";
 export const getTasks = async () => {
   const response =
     await api.get("/tasks");
-
   return response.data;
 };
 
@@ -15,7 +14,6 @@ export const createTask = async (
       "/tasks",
       data
     );
-
   return response.data;
 };
 
@@ -28,7 +26,6 @@ export const updateTask = async (
       `/tasks/${taskId}`,
       data
     );
-
   return response.data;
 };
 
@@ -39,6 +36,5 @@ export const deleteTask = async (
     await api.delete(
       `/tasks/${taskId}`
     );
-
   return response.data;
 };

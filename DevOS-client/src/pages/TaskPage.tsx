@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { getTasks, createTask, updateTask, deleteTask } from "../services/task.service";
 import { getProjects } from "../services/project.service";
 import { FiCheckSquare, FiPlus, FiCheckCircle, FiTrash2 } from "react-icons/fi";
+import TaskCard from "../components/TaskCard";
+import KanbanColumn from "../components/KanbanColumn";
+import {DndContext,type DragEndEvent} from "@dnd-kit/core";
 
 interface Task {
   _id: string;
@@ -80,6 +83,19 @@ function TasksPage() {
     }
   };
 
+  const handleDragEnd = async (event: DragEndEvent) => {
+  const { active, over } = event;
+  if (!over) return;
+  const taskId = active.id.toString();
+  const newStatus = over.id.toString();
+  try {
+    await updateTask(taskId,{status: newStatus,});
+    fetchTasks();
+  } catch (error) {
+    console.error(error);
+  }
+};
+
   if (loading) {
     return (
       <div className="flex items-center justify-center h-full">
@@ -87,7 +103,17 @@ function TasksPage() {
       </div>
     );
   }
+const todoTasks = tasks.filter(
+  (task) => task.status === "TODO"
+);
 
+const progressTasks = tasks.filter(
+  (task) => task.status === "IN_PROGRESS"
+);
+
+const doneTasks = tasks.filter(
+  (task) => task.status === "DONE"
+);
   const getPriorityColor = (p: string) => {
     switch (p) {
       case "CRITICAL": return "text-red-600 bg-red-50 border-red-200";
@@ -157,53 +183,30 @@ function TasksPage() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Simple Kanban Layout */}
-        {["TODO", "IN_PROGRESS", "DONE"].map((columnStatus) => (
-          <div key={columnStatus} className="bg-[#FAF6F0] border border-[#f0eadd] rounded-xl p-4 flex flex-col h-full min-h-[500px]">
-            <h3 className="text-sm font-serif font-medium uppercase tracking-widest text-[#111] mb-4 pb-2 border-b border-[#e6ded2]">
-              {columnStatus.replace("_", " ")}
-            </h3>
-            <div className="space-y-4 flex-1">
-              {tasks.filter(t => t.status === columnStatus).map((task) => (
-                <div key={task._id} className="bg-white border border-[#f0eadd] p-4 rounded-lg shadow-sm">
-                  <div className="flex justify-between items-start mb-2">
-                    <h4 className="font-serif font-medium text-[#111] leading-tight pr-4">{task.title}</h4>
-                    <span className={`text-[10px] uppercase font-bold tracking-wider px-2 py-1 rounded border ${getPriorityColor(task.priority)}`}>
-                      {task.priority}
-                    </span>
-                  </div>
-                  <p className="text-[13px] text-gray-500 font-light mb-4 line-clamp-2 leading-relaxed">{task.description}</p>
-                  
-                  <div className="flex justify-between items-center mt-auto border-t border-[#f0eadd] pt-3">
-                    <div className="flex gap-2">
-                      {columnStatus !== "DONE" && (
-                        <button
-                          onClick={() => handleStatusChange(task._id, columnStatus === "TODO" ? "IN_PROGRESS" : "DONE")}
-                          className="flex items-center gap-1 text-[12px] font-medium text-gray-600 hover:text-black transition"
-                        >
-                          <FiCheckCircle size={14}/> Advance
-                        </button>
-                      )}
-                    </div>
-                    <button
-                      onClick={() => handleDelete(task._id)}
-                      className="text-red-400 hover:text-red-600 transition"
-                    >
-                      <FiTrash2 size={16}/>
-                    </button>
-                  </div>
-                </div>
-              ))}
-              {tasks.filter(t => t.status === columnStatus).length === 0 && (
-                <div className="h-24 border-2 border-dashed border-[#e6ded2] rounded-lg flex items-center justify-center">
-                  <p className="text-xs text-gray-400 uppercase tracking-widest">Empty</p>
-                </div>
-              )}
-            </div>
-          </div>
-        ))}
-      </div>
+      <DndContext onDragEnd={handleDragEnd}>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <KanbanColumn 
+        title="TODO"
+        tasks={todoTasks}
+        onStatusChange={handleStatusChange}
+        onDelete={handleDelete}
+        />
+
+        <KanbanColumn
+        title="IN_PROGRESS"
+        tasks={progressTasks}
+        onStatusChange={handleStatusChange}
+        onDelete={handleDelete}
+        />
+
+        <KanbanColumn
+        title="DONE"
+        tasks={doneTasks}
+        onStatusChange={handleStatusChange}
+        onDelete={handleDelete}
+        />
+        </div>
+      </DndContext>
     </div>
   );
 }
