@@ -44,16 +44,17 @@ export const getGithubRepos = async (req: Request, res:Response) => {
                 message:"User not found",
             })
         }
-        const response = await axios.get(`https://api.github.com/users/${user.githubUsername}/repos`,{
+        const response = await axios.get(`https://api.github.com/users/${user.githubUsername}/repos?sort=updated&per_page=10`,{
             headers: {
                 Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
                 Accept:"application/vnd.github+json"
             }
         });
+        const repos = response.data.sort((a: any, b: any) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime());
 
         return res.status(200).json({
             success:true,
-            repos: response.data,
+            repos,
         });
     }catch(error:any){
         return res.status(500).json({
