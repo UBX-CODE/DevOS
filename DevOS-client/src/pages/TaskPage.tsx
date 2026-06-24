@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { getTasks, createTask, updateTask, deleteTask } from "../services/task.service";
 import { getProjects } from "../services/project.service";
-import { FiCheckSquare, FiPlus, FiCheckCircle, FiTrash2 } from "react-icons/fi";
-import TaskCard from "../components/TaskCard";
+import { FiCheckSquare, FiPlus} from "react-icons/fi";
 import KanbanColumn from "../components/KanbanColumn";
 import {DndContext,type DragEndEvent} from "@dnd-kit/core";
 
@@ -114,15 +113,6 @@ const progressTasks = tasks.filter(
 const doneTasks = tasks.filter(
   (task) => task.status === "DONE"
 );
-  const getPriorityColor = (p: string) => {
-    switch (p) {
-      case "CRITICAL": return "text-red-600 bg-red-50 border-red-200";
-      case "HIGH": return "text-orange-600 bg-orange-50 border-orange-200";
-      case "MEDIUM": return "text-blue-600 bg-blue-50 border-blue-200";
-      case "LOW": return "text-gray-600 bg-gray-100 border-gray-200";
-      default: return "text-gray-600 bg-gray-100 border-gray-200";
-    }
-  };
 
   return (
     <div className="max-w-6xl mx-auto pb-12">

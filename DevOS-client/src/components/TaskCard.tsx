@@ -38,7 +38,7 @@ const TaskCard = ({
   onStatusChange,
   onDelete,
 }: TaskCardProps) => {
-  const { setNodeRef,attributes, listeners, transform, isDragging } =
+  const { setNodeRef,attributes, listeners, transform} =
     useDraggable({id: task._id});  
     const style = {
       transform:CSS.Translate.toString(transform),
