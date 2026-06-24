@@ -1,5 +1,7 @@
 <div align="center">
 
+  <img src="./DevOS-client/public/devos-illustration.png" alt="DevOS Illustration" width="300" style="margin-bottom: 20px;" />
+
   <h1 style="font-family: 'Courier New', Courier, monospace; font-weight: bold; margin-top: 20px;">
     DevOS
   </h1>
@@ -21,13 +23,49 @@
 
 <br/>
 
-## Core Vision
+## 🌟 Overview & Core Vision
 
 Developers currently juggle multiple tools like GitHub, LeetCode, Notion, Trello, Google Tasks, Notes, and Resume Trackers. 
 
 **DevOS** eliminates context switching by combining all these experiences into one modern, scalable, and production-ready application. A single pane of glass for managing your growth, work, and developer identity.
 
-## System Architecture
+---
+
+## 📸 Screenshots
+
+### Landing Page
+![Landing Page](./DevOS-client/public/LandingPage.png)
+
+### Developer Dashboard
+![Dashboard](./DevOS-client/public/Dashboard.png)
+
+---
+
+## ✨ Key Features
+
+### 📊 The Dashboard
+Your daily command center built with a premium, minimalist UI inspired by Linear and Vercel.
+- **Top Stats Overview:** Instantly view Total Projects, Total Tasks, Completed, Pending, and Completion Rate.
+- **GitHub Integration:** Syncs your GitHub profile, showing repositories, followers, and an interactive contribution heatmap.
+- **Recent Repositories:** Quick access to your top 5 recently updated GitHub repositories.
+- **LeetCode Analytics:** Tracks your problem-solving journey with beautiful metrics for Easy, Medium, and Hard problems.
+- **Productivity Score:** A dynamic progress bar representing your task completion rate.
+- **Task Distribution Chart:** Visual breakdown of your completed vs. pending tasks via a modern Pie Chart.
+
+### 🔐 User Authentication
+A robust and secure identity system featuring fluid framer-motion animations.
+- **Registration & Login:** Seamless auth flows with smooth UI transitions.
+- **JWT Authentication:** Protected routes ensuring privacy.
+- **Password Hashing:** Utilizing `bcrypt` for utmost security.
+
+### 📋 Project & Task Management
+- **Lifecycle Management:** Create, Update, Delete, Archive projects.
+- **Task Tracking:** Priority, Due Date, Tags, Descriptions.
+- **Kanban Board:** Interactive drag-and-drop support across `Todo`, `In Progress`, `Review`, and `Done`.
+
+---
+
+## 🏗️ System Architecture
 
 ```mermaid
 graph LR
@@ -57,75 +95,25 @@ graph LR
     AI -.-> |Actionable Insights| Dashboard
 ```
 
-## Key Modules & Features
+---
 
-### User Authentication
-A robust and secure identity system.
-- Registration & Login
-- JWT Authentication & Protected Routes
-- Password Hashing (`bcrypt`)
-- Refresh Token Support *(Future)*
-- Profile Management
-
-### The Dashboard
-Your daily command center.
-- Personalized Welcome & Greeting
-- **Statistics Cards:** Total/Pending/Completed Tasks, Projects, GitHub Contributions, Repositories, LeetCode Solved, Contest Rating, Current Streak.
-- **Quick Actions:** Create Project/Task, Sync integrations.
-- **Live Activity Feed:** Recent tasks, projects, and synced coding activities.
-
-### Project Management
-- **Lifecycle Management:** Create, Update, Delete, Archive.
-- **Project Tracking:** Tech Stack, GitHub/Demo Links, Start/End Dates, Priority.
-- **Analytics:** Completion Percentage, Task distribution.
-- **Statuses:** `Planned` | `In Progress` | `Completed` | `Archived`
-
-### Task Management & Kanban Board
-- **Task Tracking:** Priority, Due Date, Tags, Descriptions.
-- **Kanban Board:** Interactive drag-and-drop support.
-- **Statuses:** `Todo` | `In Progress` | `Review` | `Done`
-- **Priority Levels:** `Low` | `Medium` | `High` | `Critical`
-
-### GitHub Integration
-Seamlessly connect your GitHub account.
-- **Metrics:** Followers, Public Repositories, Stars, Forks, Contributions.
-- **Visuals:** Contribution Heatmap, Commit Activity, Language Usage.
-- **Analytics:** Most Used Language, Most Active Repository, Weekly Trends.
-
-### LeetCode Integration
-Track your problem-solving journey.
-- **Metrics:** Problems Solved (Easy/Medium/Hard), Contest Rating, Ranking, Current Streak.
-- **Visuals:** Submission Calendar, Problem Solving Graph, Topic Wise Progress.
-
-### AI Productivity Assistant
-Smart insights to guide your growth.
-- **Suggestions:** "Focus more on Dynamic Programming this week."
-- **Summaries:** Weekly Progress & Task Prioritization
-- **Alerts:** "Your GitHub activity dropped by 20%."
-
-### Future Horizons
-- **Resume Builder:** Auto-generate PDF/DOCX resumes from your metrics and projects.
-- **Notes Module:** Create, organize, and search developer notes.
-
-## Technical Architecture
+## 🛠️ Technical Architecture
 
 ### Frontend
 Built for a responsive, modern, and snappy user experience.
 - **Framework:** React + TypeScript
-- **Styling:** Tailwind CSS
-- **Routing & Fetching:** React Router, Axios, TanStack Query
+- **Styling:** Tailwind CSS, Framer Motion
+- **Charts:** Recharts
+- **Icons:** React Icons (Feather)
+- **Routing & Fetching:** React Router, Axios
 
 ```text
-src/ 
- ├─ pages/ 
- ├─ components/ 
- ├─ layouts/ 
- ├─ hooks/ 
- ├─ services/ 
- ├─ routes/ 
- ├─ context/ 
- ├─ utils/ 
- └─ types/
+DevOS-client/src/ 
+ ├─ components/  # Reusable UI components (TaskStatusChart, GithubContribution, etc.)
+ ├─ pages/       # Route pages (Dashboard, Login, Register, etc.)
+ ├─ services/    # API integrations (GitHub, LeetCode, Backend)
+ ├─ context/     # React context (AuthContext)
+ └─ types/       # TypeScript interfaces
 ```
 
 ### Backend
@@ -133,33 +121,51 @@ Scalable and clean REST API.
 - **Runtime & Framework:** Node.js, Express.js
 - **Language:** TypeScript
 - **Database:** MongoDB Atlas + Mongoose
-- **Security:** JWT, bcryptjs, Zod (Validation)
+- **Security:** JWT, bcrypt, CORS
 
 ```text
-src/
- ├─ config/
- ├─ controllers/
- ├─ middleware/
- ├─ models/
- ├─ routes/
- ├─ services/
- ├─ validations/
- ├─ types/
- └─ utils/
+DevOS-server/src/
+ ├─ config/      # Environment & DB setup
+ ├─ controllers/ # Route handlers
+ ├─ middleware/  # Auth & Validation middlewares
+ ├─ models/      # Mongoose schemas
+ ├─ routes/      # Express routes
+ └─ services/    # Business logic
 ```
 
-## UI/UX Design Philosophy
+---
+
+## 🎨 UI/UX Design Philosophy
 
 Our design aesthetic is deeply inspired by modern platforms like **Linear, Notion, Vercel, and Clerk**.
-- **Theme:** Modern, Minimalist, Premium, Dashboard-Focused.
-- **Features:** Native Dark Mode, Smooth Micro-Animations, Professional Cards, and Clean Typography.
+- **Theme:** Modern, Minimalist, Premium, Dashboard-Focused with custom beige/dark accents (`#FAF6F0`, `#111`).
+- **Features:** Clean Typography (Serif and Sans-serif pairings), Smooth Micro-Animations, Professional Cards, and No Empty Spaces.
 
-## Development Philosophy
+---
 
-DevOS is built like a production application.
-- **Clean Architecture** & **Reusable Components**
-- **Scalability** & **Performance**
-- **Type Safety** & **Security**
-- **Maintainability**
+## 🚀 Getting Started
 
-<br>
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/UBX-CODE/DevOS.git
+   cd DevOS
+   ```
+
+2. **Setup Backend:**
+   ```bash
+   cd DevOS-server
+   npm install
+   # Create a .env file with PORT, MONGO_URI, JWT_SECRET, etc.
+   npm run dev
+   ```
+
+3. **Setup Frontend:**
+   ```bash
+   cd ../DevOS-client
+   npm install
+   # Create a .env file with VITE_API_URL, etc.
+   npm run dev
+   ```
+
+4. **Open in Browser:**
+   Navigate to `http://localhost:5173` to see DevOS in action.
