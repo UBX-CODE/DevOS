@@ -4,6 +4,8 @@ import { loginUser } from "../services/auth.service";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { FiArrowLeft } from "react-icons/fi";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
@@ -26,7 +28,15 @@ function LoginPage() {
 
   return (
     <div className="min-h-screen bg-[#FAF6F0] text-[#222] font-sans relative overflow-hidden flex flex-col items-center justify-center">
-      
+      <div className="mb-8">
+  <Link
+    to="/"
+    className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-black transition"
+  >
+    <FiArrowLeft size={16} />
+    Back to Home
+  </Link>
+</div>
       {/* Animated Floating Shapes */}
       <motion.div 
         animate={{ y: [0, -20, 0], rotate: [0, 5, 0] }}
