@@ -28,7 +28,7 @@ function LoginPage() {
 
   return (
     <div className="min-h-screen bg-[#FAF6F0] text-[#222] font-sans relative overflow-hidden flex flex-col items-center justify-center">
-      <div className="mb-8">
+      <div className="mb-4 mt-4">
   <Link
     to="/"
     className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-black transition"
