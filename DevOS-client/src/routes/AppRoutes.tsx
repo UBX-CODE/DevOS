@@ -10,6 +10,7 @@ import LandingPage from "../pages/LandingPage";
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 import OAuthSuccessPage from "../pages/OAuthSuccessPage";
+import WorkFlowPage from "../pages/WorkFlowPage";
 import ProtectedRoute from "../components/ProtectedRoute";
 import PublicRoute from "../components/PublicRoute";
 
@@ -25,6 +26,7 @@ const AppRoutes = () => {
                 <Route path="/projects" element={<ProjectsPage />} />
                 <Route path="/tasks" element={<TasksPage />} />
                 <Route path="/settings" element={<SettingsPage />} />
+                <Route path="/workflow" element={<WorkFlowPage />} />
             </Route>
         </Routes>
     );
