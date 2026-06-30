@@ -5,6 +5,7 @@ import { getLeetcodeProfile } from "../services/leetcode.service";
 import { FiGithub, FiCode, FiActivity, FiFolder, FiCheckSquare } from "react-icons/fi";
 import GithubContribution from "../components/GithubContribution";
 import TaskStatusChart from "../components/TaskStatusChart";
+import LeetcodeContribution from "../components/LeetcodeContribution";
 
 interface DashboardStats {
   totalProjects: number;
@@ -196,6 +197,9 @@ function DashboardPage() {
                   ))}
                 </div>
               </div>
+              {leetcodeData.userCalendar?.submissionCalendar && (
+                <LeetcodeContribution submissionCalendar={leetcodeData.userCalendar.submissionCalendar} />
+              )}
             </div>
           )}
 

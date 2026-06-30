@@ -20,7 +20,10 @@ export const getLeetcodeProfile = async(req:Request, res:Response) => {
             acSubmissionNum {
             difficulty
             count
-            }}}}`,
+            }}
+            userCalendar {
+            submissionCalendar
+            }}}`,
             variables: {
                 username: user.leetcodeUsername,
             },

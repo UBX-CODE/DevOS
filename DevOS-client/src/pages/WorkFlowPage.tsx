@@ -1,12 +1,12 @@
-import { ReactFlow, Background, Controls, MiniMap, addEdge } from "reactflow";
+import { ReactFlow, Background, Controls, MiniMap, addEdge , type Connection, useEdgesState, useNodesState} from "reactflow";
 import "reactflow/dist/style.css";
 import {useState} from "react";
 import FlowNode from "../components/workflow/FlowNode";
+import PropertiesPanel from "../components/workflow/PropertiesPanel";
 
 const nodeTypes = {
-    custom: FlowNode,
+  workflowNode: FlowNode,
 };
-
 const initialNodes = [
   {
     id: "1",
@@ -41,13 +41,16 @@ const initialEdges = [
 ];
     
 function WorkflowPage() {
-    const [nodes, setNodes] = useState(initialNodes);
-    const [edges, setEdges] = useState(initialEdges);
+    const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+    const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+    const onConnect = (connection: Connection) => setEdges((eds) => addEdge(connection, eds));
+    const [selectedNode, setSelectedNode] = useState<any>(null);
+    const [selectedEdge, setSelectedEdge] = useState<any>(null);
 
     const addNewNode = () => {
         const newNode = {
             id: Date.now().toString(),
-
+            type: "workflowNode",
             position: {
                 x: Math.random() * 500,
                 y: Math.random() * 500,
@@ -57,12 +60,85 @@ function WorkflowPage() {
 
         setNodes((prevNodes) => [...prevNodes, newNode]);
     };
+
+    const deleteNode = () => {
+        if (!selectedNode) return;
+        setNodes((nds) => nds.filter((node) => node.id !== selectedNode.id));
+        setEdges((eds) => eds.filter((edge) => edge.source !== selectedNode.id && edge.target !== selectedNode.id));
+        setSelectedNode(null);
+    };
+
+    const deleteEdge = () => {
+        if (!selectedEdge) return;
+        setEdges((eds) => eds.filter((edge) => edge.id !== selectedEdge.id));
+        setSelectedEdge(null);
+    };
+
+    const updateNodeLabel = (label: string) => {
+  if (!selectedNode) return;
+
+  setNodes((nds) =>
+    nds.map((node) =>
+      node.id === selectedNode.id
+        ? {
+            ...node,
+            data: {
+              ...node.data,
+              label,
+            },
+          }
+        : node
+    )
+  );
+
+  setSelectedNode((prev: any) =>
+    prev
+      ? {
+          ...prev,
+          data: {
+            ...prev.data,
+            label,
+          },
+        }
+      : null
+  );
+};
     
     return (
-    <div className="w-full h-screen">
-
-      <ReactFlow nodes={nodes} edges={edges} nodeTypes={nodeTypes}>
-        <button
+      <div className="flex h-screen">
+    <div className="flex-1 h-full relative">
+      <ReactFlow 
+        nodes={nodes} 
+        edges={edges} 
+        nodeTypes={nodeTypes} 
+        onEdgesChange={onEdgesChange} 
+        onNodesChange={onNodesChange} 
+        onConnect={onConnect} 
+        fitView 
+        onNodeClick={(_, node) => {
+          setSelectedEdge(null);
+          setSelectedNode(node);
+        }}
+        onEdgeClick={(_, edge) => {
+          setSelectedNode(null);
+          setSelectedEdge(edge);
+        }}
+        onPaneClick={() => {
+          setSelectedNode(null);
+          setSelectedEdge(null);
+        }}
+        onNodesDelete={(deleted) => {
+          if (selectedNode && deleted.find(n => n.id === selectedNode.id)) {
+            setSelectedNode(null);
+          }
+        }}
+        onEdgesDelete={(deleted) => {
+          if (selectedEdge && deleted.find(e => e.id === selectedEdge.id)) {
+            setSelectedEdge(null);
+          }
+        }}
+      >
+              <button
             onClick={addNewNode}
             className="absolute top-4 left-4 z-10 bg-black text-white px-4 py-2 rounded"
         >
@@ -72,6 +148,16 @@ function WorkflowPage() {
         <Controls />
         <MiniMap />
       </ReactFlow>
+     
+    </div>
+     {(selectedNode || selectedEdge) && (
+        <PropertiesPanel
+        selectedNode={selectedNode}
+        selectedEdge={selectedEdge}
+        onLabelChange={updateNodeLabel}
+        onDeleteNode={deleteNode}
+        onDeleteEdge={deleteEdge}
+    />)}
     </div>
   );
 }
