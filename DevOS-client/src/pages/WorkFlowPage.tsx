@@ -1,53 +1,24 @@
 import { ReactFlow, Background, Controls, MiniMap, addEdge , type Connection, useEdgesState, useNodesState} from "reactflow";
 import "reactflow/dist/style.css";
-import {useState} from "react";
+import { useParams } from "react-router-dom";
+import {useEffect, useState} from "react";
 import FlowNode from "../components/workflow/FlowNode";
 import PropertiesPanel from "../components/workflow/PropertiesPanel";
+import Toolbar from "../components/workflow/Toolbar";
+import{updateWorkflow, getWorkflow} from "../services/workflow.service";
 
-const nodeTypes = {
-  workflowNode: FlowNode,
-};
-const initialNodes = [
-  {
-    id: "1",
-    type:"workflowNode",
-    position: { x: 100, y: 100 },
-    data: { label: "Start" },
-  },
-  {
-    id: "2",
-    type:"workflowNode",
-    position: { x: 400, y: 100 },
-    data: { label: "Backend" },
-  },
-  {
-    id: "3",
-    type:"workflowNode",
-    position: { x: 700, y: 100 },
-    data: { label: "Database" },
-  },
-];
-const initialEdges = [
-  {
-    id: "e1-2",
-    source: "1",
-    target: "2",
-  },
-  {
-    id: "e1-3",
-    source: "1",
-    target: "3",
-  },
-];
-    
+
+const nodeTypes = {workflowNode: FlowNode,};
+
 function WorkflowPage() {
-    const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
-    const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+    const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+    const [nodes, setNodes, onNodesChange] = useNodesState([]);
     const onConnect = (connection: Connection) => setEdges((eds) => addEdge(connection, eds));
     const [selectedNode, setSelectedNode] = useState<any>(null);
     const [selectedEdge, setSelectedEdge] = useState<any>(null);
-
-    const addNewNode = () => {
+    const [workflowId, setWorkflowId] = useState("");
+    const { projectId } = useParams<{ projectId: string }>();
+    const addNewNode = (type:string) => {
         const newNode = {
             id: Date.now().toString(),
             type: "workflowNode",
@@ -55,7 +26,7 @@ function WorkflowPage() {
                 x: Math.random() * 500,
                 y: Math.random() * 500,
             },
-            data: { label: "New Node" },
+            data: { label: type, nodeType:type },
         };
 
         setNodes((prevNodes) => [...prevNodes, newNode]);
@@ -75,35 +46,30 @@ function WorkflowPage() {
     };
 
     const updateNodeLabel = (label: string) => {
-  if (!selectedNode) return;
+    if (!selectedNode) return;
+    setNodes((nds) => nds.map((node) => node.id === selectedNode.id ? {...node, data: {...node.data,label,},}: node));
+    setSelectedNode((prev: any) => prev ? { ...prev, data: { ...prev.data,label,},}: null);
+    };
 
-  setNodes((nds) =>
-    nds.map((node) =>
-      node.id === selectedNode.id
-        ? {
-            ...node,
-            data: {
-              ...node.data,
-              label,
-            },
-          }
-        : node
-    )
-  );
+    const saveWorkflow = async() => {
+      await updateWorkflow(workflowId, {
+        nodes,
+        edges,
+      });
+    }
+    useEffect(() => {
+      if (!projectId) return;
 
-  setSelectedNode((prev: any) =>
-    prev
-      ? {
-          ...prev,
-          data: {
-            ...prev.data,
-            label,
-          },
-        }
-      : null
-  );
-};
-    
+      const loadWorkflow = async () => {
+        const response = await getWorkflow(projectId);
+
+        setWorkflowId(response.workflow._id);
+        setNodes(response.workflow.nodes);
+        setEdges(response.workflow.edges);
+      };
+
+      loadWorkflow();
+    }, [projectId]);   
     return (
       <div className="flex h-screen">
     <div className="flex-1 h-full relative">
@@ -138,12 +104,7 @@ function WorkflowPage() {
           }
         }}
       >
-              <button
-            onClick={addNewNode}
-            className="absolute top-4 left-4 z-10 bg-black text-white px-4 py-2 rounded"
-        >
-            Add Node
-        </button>
+        <Toolbar addNode={addNewNode} />
         <Background />
         <Controls />
         <MiniMap />

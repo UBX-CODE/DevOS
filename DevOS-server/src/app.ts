@@ -8,6 +8,7 @@ import githubRoutes from "./routes/github.routes";
 import leetcodeRoutes from "./routes/leetcode.routes";
 import session from "express-session";
 import passport from "./config/passport";
+import workflowRoutes from "./routes/workflow.routes";
 
 const app = express();
 app.use(cors());
@@ -22,6 +23,8 @@ app.use("/api/leetcode",leetcodeRoutes);
 app.use(session({ secret: "devos-secret", resave: false, saveUninitialized: false,}));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use("/api/workflows", workflowRoutes);
+
 
 app.get("/", (_, res) => {
     res.send("DevOS API Running");
