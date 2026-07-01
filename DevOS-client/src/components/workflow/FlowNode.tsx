@@ -14,7 +14,6 @@ function FlowNode({ id, selected, data }: FlowNodeProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [value, setValue] = useState(data.label);
   const { setNodes } = useReactFlow();
-  const [selectedNode, setSelectedNode] = useState<any>(null);
 
   const handleSave = () => {
     setIsEditing(false);
